@@ -80,7 +80,7 @@ int sock_valid (const SOCKET sockfd);
 int sock_set_blocking(SOCKET sockfd, const int block);
 int sock_close(SOCKET sockfd);
 SOCKET sock_socket (int domain, int type, int protocol);
-SOCKET sock_accept (SOCKET s, struct sockaddr *addr, mysocklen_t *addrlen);
+SOCKET sock_accept (SOCKET s, struct sockaddr *addr, socklen_t *addrlen);
 SOCKET sock_create_udp_socket ();
 char *sock_get_local_ipaddress ();
 void sock_close_all_sockets ();
