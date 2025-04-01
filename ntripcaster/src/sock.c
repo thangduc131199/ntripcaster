@@ -383,7 +383,7 @@ SOCKET sock_socket(int domain, int type, int protocol)
 	return s;
 }
 
-SOCKET sock_accept(SOCKET s, struct sockaddr * addr, mysocklen_t * addrlen)
+SOCKET sock_accept(SOCKET s, struct sockaddr * addr, socklen_t * addrlen)
 {
 	SOCKET rs = accept(s, addr, addrlen);
 

@@ -191,7 +191,7 @@ connection_t *
 get_connection (sock_t *sock)
 {
 	int sockfd;
-	mysocklen_t sin_len;
+	socklen_t sin_len;
 	connection_t *con;
 	fd_set rfds;
 	struct timeval tv;
