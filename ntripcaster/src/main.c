@@ -510,10 +510,11 @@ win_sig_die(DWORD CtrlType)
 RETSIGTYPE 
 sig_child(int signo)
 {
-	pid_t pid;
+	// pid_t pid;
 	int stat;
   
-	pid = wait(&stat);
+	// pid = wait(&stat);
+	wait(&stat);
 #ifdef __linux__
 	signal(SIGCHLD, sig_child);
 #endif

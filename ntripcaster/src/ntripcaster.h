@@ -157,6 +157,8 @@ typedef enum type_e {integer_e, real_e, string_e, function_e} type_t;
 
 #ifndef HAVE_SOCKLEN_T
 typedef int mysocklen_t;
+#else
+typedef socklen_t mysocklen_t;
 #endif
 
 #ifndef _WIN32
