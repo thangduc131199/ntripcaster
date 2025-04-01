@@ -407,9 +407,9 @@ int server_detach()
 #if HAVE_SETPGID
 		setpgid(0, 0);
 #endif
-		freopen("/dev/null", "r", stdin);
-		freopen("/dev/null", "w", stdout);
-		freopen("/dev/null", "w", stderr);
+		if (!freopen("/dev/null", "r", stdin)) perror("freopen stdin failed");
+		if (!freopen("/dev/null", "w", stdout)) perror("freopen stdout failed");
+		if (!freopen("/dev/null", "w", stderr)) perror("freopen stderr failed");
 		fd_close(0);
 		fd_close(1);
 		fd_close(2);
