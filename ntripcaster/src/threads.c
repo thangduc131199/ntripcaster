@@ -462,7 +462,7 @@ thread_exit_c (int val, int line, char *file)
 #ifdef _WIN32
 	ExitThread(val);
 #else
-	pthread_exit((void *)val);
+    pthread_exit((void *)(intptr_t)val);
 #endif
 }
 

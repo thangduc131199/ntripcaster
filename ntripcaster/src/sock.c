@@ -383,7 +383,7 @@ SOCKET sock_socket(int domain, int type, int protocol)
 	return s;
 }
 
-SOCKET sock_accept(SOCKET s, struct sockaddr * addr, mysocklen_t * addrlen)
+SOCKET sock_accept(SOCKET s, struct sockaddr * addr, socklen_t * addrlen)
 {
 	SOCKET rs = accept(s, addr, addrlen);
 
@@ -897,7 +897,7 @@ SOCKET sock_connect_wto(const char *hostname, const int port,
 			sock_close(sockfd);
 			return INVALID_SOCKET;
 		}
-		memcpy(&server.sin_addr, &sin.sin_addr, sizeof (sin));
+		memcpy(&server.sin_addr, &sin.sin_addr, sizeof(sin.sin_addr));
 	} else {
 		host =
 			ice_gethostbyname(hostname, &hostinfo, buf, BUFSIZE,
@@ -928,7 +928,7 @@ SOCKET sock_connect_wto(const char *hostname, const int port,
 		struct timeval tv;
 		int retval;
 		int val;
-		mysocklen_t valsize = sizeof (int);
+		socklen_t valsize = sizeof (int);
 
 		xa_debug(3,
 			 "DEBUG: sock_connect(): doing a connection w/ timeout");
@@ -959,7 +959,7 @@ SOCKET sock_connect_wto(const char *hostname, const int port,
 		if (select(sockfd + 1, NULL, &wfds, NULL, &tv)) {
 			retval = getsockopt(sockfd, SOL_SOCKET, SO_ERROR,
 					    (void *) &val,
-					    (mysocklen_t *) & valsize);
+					    (socklen_t *) & valsize);
 			if ((retval == 0) && (val == 0)) {
 				sock_set_blocking(sockfd, SOCK_BLOCK);
 				return sockfd;
@@ -1063,7 +1063,7 @@ char *sock_get_local_ipaddress()
 	}
 
 
-	if (getsockname(sockfd, (struct sockaddr *) &cliaddr, &sinlen) == 0) {
+	if (getsockname(sockfd, (struct sockaddr *) &cliaddr, (socklen_t *)&sinlen) == 0) {
 		close(sockfd);
 		if (inet_ntoa(cliaddr.sin_addr))
 			return nstrdup(inet_ntoa(cliaddr.sin_addr));
